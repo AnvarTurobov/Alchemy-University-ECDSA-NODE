@@ -6,7 +6,7 @@ const privateKey = "c73cbaa87705e50151ce6dafa32bb9ca044e6bd473d76084d241c4567135
 
 const message = {
     address: "807def5e86700b86d22cdc2e95e42302ec9b646a",
-    amount: 100,
+    amount: 10,
     recepient: "aa0331b89831775df56e7d97c7545691025d49b5"
 }
 
