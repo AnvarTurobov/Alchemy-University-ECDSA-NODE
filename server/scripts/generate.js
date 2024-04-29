@@ -1,6 +1,6 @@
 const { secp256k1 } = require("ethereum-cryptography/secp256k1.js");
 const { keccak256 } = require("ethereum-cryptography/keccak");
-const { toHex, utf8ToBytes } = require("ethereum-cryptography/utils");
+const { toHex } = require("ethereum-cryptography/utils");
 
 const  privateKey = secp256k1.utils.randomPrivateKey();
 console.log("privateKey : ", toHex(privateKey));
