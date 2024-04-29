@@ -7,9 +7,15 @@ app.use(cors());
 app.use(express.json());
 
 const balances = {
-  "0x1": 100,
-  "0x2": 50,
-  "0x3": 75,
+  "807def5e86700b86d22cdc2e95e42302ec9b646a": 100,
+  "aa0331b89831775df56e7d97c7545691025d49b5": 50,
+  "72a5153ac01e802b5e3e15ef5d83e96daf4ceb22": 75,
+};
+
+const publicKeys = {
+  "807def5e86700b86d22cdc2e95e42302ec9b646a": "038f14513e828f6d22c5219f54ca10d7460cc185eedf9b5ef5766cbe9d6270224b",
+  "aa0331b89831775df56e7d97c7545691025d49b5": "0391e3762671662e420ea10dea9c90a735fd360c4b591c95c491c28f6b3202c035",
+  "72a5153ac01e802b5e3e15ef5d83e96daf4ceb22": "0317e8b0043a1b3efd36effd545e377936f82ce6223d8bcce3fba771d33b906af8",
 };
 
 app.get("/balance/:address", (req, res) => {
@@ -17,6 +23,14 @@ app.get("/balance/:address", (req, res) => {
   const balance = balances[address] || 0;
   res.send({ balance });
 });
+
+app.get("/publicKey/:address", (req, res) => {
+  const { address } = req.params;
+  const publicKey = publicKeys[address] || "";
+  res.send({ publicKey });
+});
+
+
 
 app.post("/send", (req, res) => {
   const { sender, recipient, amount } = req.body;
