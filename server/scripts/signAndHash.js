@@ -2,8 +2,14 @@ const { secp256k1 } = require("ethereum-cryptography/secp256k1.js");
 const { keccak256 } = require("ethereum-cryptography/keccak");
 const { toHex, utf8ToBytes } = require("ethereum-cryptography/utils");
 
-const privateKey = "c73cbaa87705e50151ce6dafa32bb9ca044e6bd473d76084d241c45671351d41"
 
+// To complete the transaction, follow the steps below:
+// 1. update privateKey and contents of the message object below and save the file
+// 2. run node scripts/signAndHash.js        
+// 3. copy the publicKey, recoveryBit and signature from the console output
+// 4. paste the values into the client side-form to corresponding fields and complete the transaction
+
+const privateKey = "c73cbaa87705e50151ce6dafa32bb9ca044e6bd473d76084d241c45671351d41"
 const message = {
     sender: "807def5e86700b86d22cdc2e95e42302ec9b646a",
     amount: 25,
@@ -11,32 +17,17 @@ const message = {
 }
 
 const messageHash = keccak256(utf8ToBytes(JSON.stringify(message)));
-console.log(" 1 - messageHash : ", toHex(messageHash));
 
 const publicKey = secp256k1.getPublicKey(privateKey);
-console.log(" 2 - publicKey : ", toHex(publicKey));
+console.log(" 1 - Public Key : ", toHex(publicKey));
 
 const signature = secp256k1.sign(messageHash, privateKey);
-//console.log("signature : ", signature);
 
 const recoveryBit = signature.recovery;
-console.log(" 3 - recoveryBit : ", recoveryBit);
+console.log(" 2 - Recovery Bit : ", recoveryBit);
 
 const signatureHex = signature.toCompactHex();
-console.log(" 4 - signature COMPACT Hex : ", signatureHex);
-
-const signatureObj = secp256k1.Signature.fromCompact(signatureHex); 
-console.log(" 6 - Signature Obj with missing recovery bit : ", signatureObj);
-
-const signatureFromHex = signatureObj.addRecoveryBit(recoveryBit); 
-console.log(" 7 - Complete Signature Obj with recovery bit : ", signatureFromHex);
-
-const recoveredPublicKey= signatureFromHex.recoverPublicKey(messageHash).toRawBytes();
-console.log(" 8 - Recovered PublicKey from Signature : ", toHex(recoveredPublicKey));
-
-const recoveredPublicKey2= signatureFromHex.recoverPublicKey(messageHash);
-//console.log(" 8 - Recovered PublicKey2 from Signature : ", recoveredPublicKey2);
-
+console.log(" 3 - Signature : ", signatureHex);
 
 
 

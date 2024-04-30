@@ -12,7 +12,7 @@ const address = keccak256(publicKey.slice(1)).slice(-20);
 console.log("address : ", toHex(address));
 
 
-//pre generated publicKeys, privateKeys and addresses:
+//pre generated publicKeys, privateKeys and addresses to be used to test the app:
 
 // privateKey :  c73cbaa87705e50151ce6dafa32bb9ca044e6bd473d76084d241c45671351d41
 // publicKey :  038f14513e828f6d22c5219f54ca10d7460cc185eedf9b5ef5766cbe9d6270224b
