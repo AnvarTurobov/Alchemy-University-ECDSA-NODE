@@ -5,9 +5,9 @@ const { toHex, utf8ToBytes } = require("ethereum-cryptography/utils");
 const privateKey = "c73cbaa87705e50151ce6dafa32bb9ca044e6bd473d76084d241c45671351d41"
 
 const message = {
-    address: "807def5e86700b86d22cdc2e95e42302ec9b646a",
-    amount: 10,
-    recepient: "aa0331b89831775df56e7d97c7545691025d49b5"
+    sender: "807def5e86700b86d22cdc2e95e42302ec9b646a",
+    amount: 25,
+    recipient: "aa0331b89831775df56e7d97c7545691025d49b5"
 }
 
 const messageHash = keccak256(utf8ToBytes(JSON.stringify(message)));
@@ -33,6 +33,10 @@ console.log(" 7 - Complete Signature Obj with recovery bit : ", signatureFromHex
 
 const recoveredPublicKey= signatureFromHex.recoverPublicKey(messageHash).toRawBytes();
 console.log(" 8 - Recovered PublicKey from Signature : ", toHex(recoveredPublicKey));
+
+const recoveredPublicKey2= signatureFromHex.recoverPublicKey(messageHash);
+//console.log(" 8 - Recovered PublicKey2 from Signature : ", recoveredPublicKey2);
+
 
 
 
